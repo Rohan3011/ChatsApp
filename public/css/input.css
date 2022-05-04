@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+
+
+@layer base {
+    html {
+        @apply h-full w-full;
+    }
+
+    body {
+        @apply grid place-items-center font-roboto text-base;
+    }
+
+    h1{
+        @apply text-4xl;
+    }
+
+    ul{
+        @apply list-inside list-disc;
+    }
+
+    ol{ @apply list-inside list-decimal;}
+}
+
+
+@layer components {
+
+    .bg-primary {
+        @apply bg-gradient-to-r from-zinc-700 to-neutral-700;
+    }
+
+    .bg-secondary {
+        @apply bg-gradient-to-r from-zinc-700 to-neutral-700 ;
+    }
+
+    .input-label{
+        @apply text-base text-slate-200;
+    }
+
+
+    .input-cell {
+        @apply border bg-neutral-600 border-neutral-600 grow focus:shadow-lg focus:border outline-none p-2 rounded text-lg text-slate-100 font-medium;
+    }
+
+    .btn{
+        @apply p-2 rounded text-slate-100 text-lg font-medium cursor-pointer;
+    }
+
+    .submit-btn{
+        @apply btn bg-gradient-to-r from-cyan-600 to-blue-600 bg-transparent;
+    }
+    .leave-btn{
+        @apply btn border border-red-500 font-medium text-red-500 bg-transparent;
+    }
+
+
+    .toolbar{
+        @apply text-slate-200 flex divide-neutral-500  border-neutral-500;
+    }
+
+    .group{
+        @apply flex justify-center items-center;
+    }
+
+    .editor-btn{
+        @apply box-border w-8 h-8 font-thin text-base m-1 flex items-center justify-center;
+    }
+
+    .frame-main{
+        @apply w-full h-20 text-white text-lg outline-none;
+    }
+
+}  

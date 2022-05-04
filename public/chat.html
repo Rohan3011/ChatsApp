@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+    integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/output.css" />
+  <title>ChatsApp</title>
+</head>
+
+<body class="h-full" onload="enableEditMode();">
+  <div class="h-full w-full flex flex-col">
+
+    <!-- body -->
+    <main class="flex-grow flex bg-primary">
+
+      <!-- sidebar -->
+      <div class="border-r border-neutral-500 hidden md:flex flex-col text-slate-100  w-72">
+
+        <!-- title -->
+        <h1 class=" p-4 text-white flex space-x-2">
+          <i class="logo">
+            <img src="chatsapp.svg" alt="logo">
+          </i>
+          <a href="/">ChatsApp</a>
+        </h1>
+
+
+        <div class="users p-4  flex flex-col items-start space-y-2">
+          <h3 class="text-xl flex space-x-2 text-slate-300 font-semibold">
+            <!-- <p class="icon"><i class="fas fa-users"></i></p> -->
+            <span>Users</span>
+          </h3>
+          <ul id="users" class="flex flex-col px-4"></ul>
+        </div>
+      </div>
+
+      <!-- chat window -->
+      <div class="flex-grow h-full flex flex-col">
+        <header class="bg-primary flex p-4  border-b border-neutral-500 ">
+          <!-- room name -->
+          <h1 class="text-white flex items-center">
+            <!-- <p class="icon"><i class="fas fa-comments"></i></p> -->
+            <span id="room-name" class="text-xl text-center text-white font-semibold"></span>
+          </h1>
+
+
+          <a id="leave-btn" class="leave-btn px-4 py-1 ml-auto flex items-center ">
+            <button> Leave Room</button>
+          </a>
+        </header>
+
+
+        <!-- chat messages -->
+        <div class="chat-messages grow overflow-y-auto bg-primary "></div>
+
+
+        <!-- chat input -->
+        <div id="chatField" class="bg-primary p-4 m-4">
+          <form id="chat-form" class="flex flex-col border border-neutral-500">
+            <!-- toolbar -->
+            <header class="toolbar  divide-x border-b px-4">
+              <div class="group">
+                <button type="button" class="editor-btn" data-element="bold">
+                  <i class="fa fa-bold"></i>
+                </button>
+                <button type="button" class="editor-btn" data-element="Italic">
+                  <i class="fa fa-italic"></i>
+                </button>
+                <button type="button" class="editor-btn" data-element="underline">
+                  <i class="fa fa-underline"></i>
+                </button>
+                <button type="button" class="editor-btn" data-element="strikethrough">
+                  <i class="fa fa-strikethrough"></i>
+                </button>
+              </div>
+
+              <div class="group">
+                <button type="button" class="editor-btn" data-element="insertOrderedList">
+                  <i class="fa fa-list-ol "></i>
+                </button>
+                <button type="button" class="editor-btn" data-element="insertUnorderedList">
+                  <i class="fa fa-list-ul"></i>
+                </button>
+              </div>
+              <div class="group">
+                <button type="button" class="editor-btn" data-element="undo">
+                  <i class="fa fa-undo "></i>
+                </button>
+                <button type="button" class="editor-btn" data-element="redo">
+                  <i class="fa fa-redo"></i>
+                </button>
+              </div>
+              <div class="group">
+                <button type="button" class="editor-btn" data-element="createLink">
+                  <i class="fa fa-link "></i>
+                </button>
+                <button type="button" class="editor-btn" data-element="insertImage">
+                  <i class="fa fa-image "></i>
+                </button>
+              </div>
+
+              <div class="group">
+                <button type="button" class="editor-btn" data-element="blockquote">
+                  <i class="fa fa-quote-left "></i>
+                </button>
+                <button type="button" class="editor-btn" data-element="q">
+                  <i class="fa fa-code "></i>
+                </button>
+              </div>
+            </header>
+
+
+            <!-- input field -->
+            <section class="w-full   flex flex-col p-4">
+              <iframe src="" id="editor" name="richTextEditor">
+              </iframe>
+
+              <div class="footer w-full flex">
+
+                <div class="toolbar grow">
+                  <div class="group">
+                    <button type="button" class="editor-btn border-r border-neutral-500" data-element="UploadFile">
+                      <i class="fa fa-plus "></i>
+                      <!-- <input type="file" /> -->
+                    </button>
+                  </div>
+
+                  <div class="group">
+                    <button type="button" class="editor-btn" id="emojiPicker" data-element="addEmoji">
+                      <i class="fa fa-grin"></i>
+                      <div class="tooltip">
+                        <emoji-picker></emoji-picker>
+                      </div>
+                    </button>
+
+                    <button type="button" class="editor-btn" class="editor-btn" data-element="mention">
+                      <i class="fa fa-at"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <button type="submit" class="submit-btn px-4 py-1"><i class="fas fa-paper-plane"></i> Send<button>
+              </div>
+
+          </form>
+          </section>
+
+        </div>
+      </div>
+  </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
+    integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4=" crossorigin="anonymous"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/richText.js">  </script>
+</body>
+
+</html>
