@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "start server",
-    "dev": "nodemon server"
+    "dev": "nodemon server",
+    "css": "npx tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch"
   },
   "author": "Rohan Kamble",
   "license": "MIT",
@@ -16,6 +17,7 @@
     "socket.io": "^4.4.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "tailwindcss": "^3.0.24"
   }
 }

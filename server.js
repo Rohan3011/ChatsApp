@@ -15,7 +15,7 @@ const io = socketio(server)
 // set static folder
 app.use(express.static(path.join(__dirname, 'public')))
 
-const BOTNAME = "chat bot"
+const BOTNAME = "chatbot"
 
 // Client connection
 io.on('connection', (socket) => {
@@ -55,10 +55,12 @@ io.on('connection', (socket) => {
                 formatMessage(BOTNAME, `${user.username} has left the chat.`))
 
         // Send users and room info
-        io.to(user.room).emit('roomUsers', {
-            room: user.room,
-            users: getRoomUsers(user.room)
-        })
+        if (user) {
+            io.to(user.room).emit('roomUsers', {
+                room: user.room,
+                users: getRoomUsers(user.room)
+            })
+        }
     })
 
 
