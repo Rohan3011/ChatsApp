@@ -2,6 +2,8 @@ const chatForm = document.getElementById('chat-form');
 const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
+let typing = false;
+const timeout = undefined;
 
 // Get username and room from URL
 const { username, room } = Qs.parse(location.search, {
@@ -103,3 +105,23 @@ document.getElementById('leave-btn').addEventListener('click', () => {
   }
 });
 
+const limit = 5000;
+
+// typing event
+const editor = document.getElementById('editor');
+$(document).ready(function () {
+  $(editor.contentDocument.querySelector('body')).keypress((e) => {
+    if (e.which != 13) {
+      socket.emit('typing')
+    }
+  })
+});
+
+// Notify typing
+socket.on('display', (user) => {
+  $('.typing').text(`${user.username} is typing...`);
+  setTimeout(() => {
+    $('.typing').text('');
+  }, limit);
+
+})

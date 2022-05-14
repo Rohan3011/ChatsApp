@@ -3,7 +3,7 @@ function enableEditMode() {
     richTextEditor.document.designMode = "On";
 }
 
-const editor = document.getElementById('editor');
+// const editor = document.getElementById('editor');
 let body = editor.contentDocument.querySelector('body');
 body.style.color = 'white';
 body.style.fontSize = 'large';

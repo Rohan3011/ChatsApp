@@ -38,6 +38,14 @@ io.on('connection', (socket) => {
         })
     })
 
+    // Listen for typing
+    socket.on('typing', () => {
+        const user = getCurrentUser(socket.id)
+        if (user)
+            io.to(user.room).emit('display', user)
+
+    })
+
     // Listen for chatMessage
     socket.on('chatMessage', (msg) => {
         const user = getCurrentUser(socket.id)
